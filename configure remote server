@@ -1,0 +1,17 @@
+these steps list out how to configure a remote server in NAGIOS server.
+https://www.continualintegration.com/miscellaneous-articles/how-do-you-install-and-configure-the-nrpe-agent-to-have-nagios-monitor-on-a-rhel-server-in-aws/ 
+#yum -y update
+#yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#yum -y install nrpe nagios-plugins-users nagios-plugins-load nagios-plugins-swap nagios-plugins-disk nagios-plugins-procs
+#cd /etc/nagios
+#cp nrpe.cfg nrpe.cfg.bak
+#vim /etc/nagios/nrpe.cfg
+Edit the below line mentioned in teh nrpe.cfg file with the nagios server IP.
+allowed_hosts=127.0.0.1,<Nagios_Server_IP EC2 instance public dns>
+Note:  This setting can support multiple Nagios core servers.  The IP addresses should be separated by a comma if you have more than one.
+#systemctl restart nrpe
+#systemctl enable nrpe
+
+Steps to Install NRPE Plugins on Nagios Server
+#yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#yum install -y nrpe nagios-plugins-all
